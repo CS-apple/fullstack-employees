@@ -6,6 +6,7 @@ export async function createEmployee({ name, birthday, salary }) {
   // TODO
   const sql = `INSERT INTO employees (name, birthday, salary ) VALUES ($1,$2,$3) RETURNING *`;
   const {rows: [employee]} = await db.query(sql,[name, birthday, salary])
+  if(!employee)return null
   return employee;
 }
 
@@ -65,6 +66,8 @@ export async function deleteEmployee(id) {
     RETURNING *
     `;
   const {rows: [employee]} = await db.query(sql, [id])
+  if(!employee) return null
+  return employee
 }
 
 
