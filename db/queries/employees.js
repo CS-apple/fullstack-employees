@@ -1,6 +1,12 @@
+
+import db from "#db/client"
+
 /** @returns the employee created according to the provided details */
 export async function createEmployee({ name, birthday, salary }) {
   // TODO
+  const sql = `INSERT INTO employees (name, birthday, salary ) VALUES ($1,$2,$3) RETURNING *`;
+  const {rows: [employee]} = await db.query(sql,[name, birthday, salary])
+  return employee;
 }
 
 // === Part 2 ===
@@ -8,6 +14,7 @@ export async function createEmployee({ name, birthday, salary }) {
 /** @returns all employees */
 export async function getEmployees() {
   // TODO
+
 }
 
 /**
@@ -33,3 +40,58 @@ export async function updateEmployee({ id, name, birthday, salary }) {
 export async function deleteEmployee(id) {
   // TODO
 }
+
+
+export const employeeList = [
+  {
+    name: "Dimitri",
+    birthday:"1993-06-11",
+    salary: 1000
+  },
+  {
+    name: "Michelle",
+    birthday:"1996-01-4",
+    salary: 1800
+  },
+  {
+    name: "Katia",
+    birthday:"1995-05-26",
+    salary: 1000
+  },
+  {
+    name: "Maury",
+    birthday:"1999-01-01",
+    salary: 1100
+  },
+  {
+    name: "Jade",
+    birthday:"1993-06-11",
+    salary: 1400
+  },
+  {
+    name: "Rafick",
+    birthday:"1993-06-11",
+    salary: 1600
+  },
+  {
+    name: "Mandy",
+    birthday:"1998-06-01",
+    salary: 1000
+  },
+  {
+    name: "Sylvester",
+    birthday:"1993-06-11",
+    salary: 1000
+  },
+  {
+    name: "Helena",
+    birthday:"1993-06-11",
+    salary: 1000
+  },
+  {
+    name: "Guilia",
+    birthday:"1993-06-11",
+    salary: 1000
+  },
+
+]
